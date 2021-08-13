@@ -66,7 +66,7 @@ Please keep in mind that even though we take as much security measures as we can
 	-> For [UEFI systems](https://wiki.archlinux.org/title/GRUB#UEFI_systems "GRUB") create an [EFI system partition](https://wiki.archlinux.org/title/EFI_system_partition "EFI system partition") with an appropriate size, it will later be mounted at /boot/efi
 
 
-# Introduction:
+# Installation:
 ---------------------------
 
 -> Download arch linux installation image from [here](https://archlinux.org/download/)
