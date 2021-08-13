@@ -137,13 +137,13 @@ cryptsetup close to_be_wiped
 -> Formatting:
 
 ```
-* mkfs.fat -F32 -n EFI /dev/sda1
-* cryptsetup luksFormat --type luks1 --use-random -S 1 -s 512 -h sha512 -i 5000 /dev/sda3 
-* cryptsetup luksOpen /dev/sda3 cryptroot
-* cryptsetup open --type plain --key-file /dev/urandom /dev/sda2 swap 
-* mkswap -L swap /dev/mapper/swap 
-* swapon -L swap
-* mkfs.btrfs --force --label cryptroot /dev/mapper/cryptroot
+ mkfs.fat -F32 -n EFI /dev/sda1
+ cryptsetup luksFormat --type luks1 --use-random -S 1 -s 512 -h sha512 -i 5000 /dev/sda3 
+ cryptsetup luksOpen /dev/sda3 cryptroot
+ cryptsetup open --type plain --key-file /dev/urandom /dev/sda2 swap 
+ mkswap -L swap /dev/mapper/swap 
+ swapon -L swap
+ mkfs.btrfs --force --label cryptroot /dev/mapper/cryptroot
 ```
 
 #### Warning:
@@ -152,36 +152,36 @@ cryptsetup close to_be_wiped
 -> Creating subvolumes:
 
 ```
-* mount -t btrfs -o compress=lzo /dev/mapper/cryptroot /mnt   
-* cd /mnt
-* btrfs subv create @  
-* btrfs subv create @home
-* btrfs subv create @snaphsots
-* umount /mnt
-* o=defaults,x-mount.mkdir 
-* o_btrfs=$o,compress=lzo,ssd,noatime    
-* mount -o compress=lzo,subvol=@,$o_btrfs /dev/mapper/cryptroot /mnt
-* mount -o compress=lzo,subvol=@home,$o_btrfs /dev/mapper/cryptroot /mnt/home
-* mount -o compress=lzo,subvol=@snapshots,$o_btrfs /dev/mapper/cryptroot /mnt/.snapshots 
+ mount -t btrfs -o compress=lzo /dev/mapper/cryptroot /mnt   
+ cd /mnt
+ btrfs subv create @  
+ btrfs subv create @home
+ btrfs subv create @snaphsots
+ umount /mnt
+ o=defaults,x-mount.mkdir 
+ o_btrfs=$o,compress=lzo,ssd,noatime    
+ mount -o compress=lzo,subvol=@,$o_btrfs /dev/mapper/cryptroot /mnt
+ mount -o compress=lzo,subvol=@home,$o_btrfs /dev/mapper/cryptroot /mnt/home
+ mount -o compress=lzo,subvol=@snapshots,$o_btrfs /dev/mapper/cryptroot /mnt/.snapshots 
 ```
 
 -> Mounting ESP partition
 
 ```
-* mkdir -p /mnt/boot/efi
-* mount /dev/sda1 /mnt/boot/efi
+ mkdir -p /mnt/boot/efi
+ mount /dev/sda1 /mnt/boot/efi
  ``` 
 
 -> Installing packages to our new root directory /mnt
 
 ```
-* pacstrap /mnt base base-devel btrfs-progs linux linux-firmware mkinitcpio nano vim dhcpcd wpa_supplicant
+ pacstrap /mnt base base-devel btrfs-progs linux linux-firmware mkinitcpio nano vim dhcpcd wpa_supplicant
 ```  
 
 -> fstab + crypttab
 
 ```  
-* genfstab -L -p /mnt >> /mnt/etc/fstab 
+  genfstab -L -p /mnt >> /mnt/etc/fstab 
   
   change this in /mnt/etc/fstab
   LABEL=swap          	none      	swap      	defaults  	0 0
@@ -189,7 +189,7 @@ cryptsetup close to_be_wiped
   to this:
   /dev/mapper/swap    	none      	swap      	sw  	0 0
   
-* edit crypttab:
+  edit crypttab:
   
 swap        /dev/sda2        /dev/urandom        swap,offset=2048,cipher=aes-xts-plain64,size=256
 ```  
@@ -200,28 +200,28 @@ swap        /dev/sda2        /dev/urandom        swap,offset=2048,cipher=aes-xts
 
 -> localtime + syncing hardware clock + hostname
 ```
-* ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime
+ ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime
 
-* hwclock --systohc --utc
+hwclock --systohc --utc
 
-* echo arch > /etc/hostname
+ echo arch > /etc/hostname
 ```
 
 -> Installing GRUB
 ```
-* pacman -S grub
+ pacman -S grub
 
-* Edit /etc/default/grub, add GRUB_ENABLE_CRYPTODISK=y and GRUB_DISABLE_SUBMENU=y
+ Edit /etc/default/grub, add GRUB_ENABLE_CRYPTODISK=y and GRUB_DISABLE_SUBMENU=y
 
-* GRUB_CMDLINE_LINUX="cryptdevice=/dev/sda3:cryptroot:allow-discards root=/dev/mapper/cryptroot"
+ GRUB_CMDLINE_LINUX="cryptdevice=/dev/sda3:cryptroot:allow-discards root=/dev/mapper/cryptroot"
   
-* pacman -S efibootmgr
+ pacman -S efibootmgr
 
-* grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB --modules="tpm" --disable-shim-lock
+ grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB --modules="tpm" --disable-shim-lock
 
-* pacman -S intel-ucode
+ pacman -S intel-ucode
 
-* grub-mkconfig -o /boot/grub/grub.cfg
+ grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
 -> Adding a secret key file to LUKS
@@ -254,9 +254,11 @@ mkinitcpio -p linux
 
 -> Regenerate GRUB
 ```
-* GRUB_CMDLINE_LINUX="... cryptkey=rootfs:/root/secrets/crypto_keyfile.bin"
+Edit /etc/default/grub again
 
-* grub-mkconfig -o /boot/grub/grub.cfg
+GRUB_CMDLINE_LINUX="... cryptkey=rootfs:/root/secrets/crypto_keyfile.bin"
+
+grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
 ### Side Note:
