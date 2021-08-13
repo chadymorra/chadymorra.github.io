@@ -1,5 +1,5 @@
 # Introduction:
--------------
+
 
 This is a documentation for an arch-linux installation from a security standpoint using BTRFS filesystem instead of LVM on Full Disk Encryption including /boot using LUKS.
 
@@ -18,8 +18,9 @@ In order to give some context and understand why we are doing this, we must firs
 Please keep in mind that even though we take as much security measures as we can to protect ourselves against threats, in the case of physical access to a device for a good duration of time, nothing will 100% guarantee your security but we will definetly make it extremly hard for anyone to access it :)
 
 -----------
+
 # Plan:
------
+
 
 | partition		| mount			| Encrypted |
 |---------------|---------------|-----------|				
@@ -52,8 +53,9 @@ Please keep in mind that even though we take as much security measures as we can
 
 
 --------------
+
 # Implementation:
----------------
+
 
 Few notes worth mentioning:
 - practice this on a virtual machine first.
@@ -272,8 +274,9 @@ The answer to that is: well that's how LUKS work:
 `passwd <user>`
 
 
+
 # Post Installation
-------------------------------------
+
 
 -> At this point we have finished our installation, I will not go into post installation procedures because it is already covered in the Arch Linux wiki but we can confidently say that we have a fully encrypted disk by now and we have protected ourselves from data leaks in case of device theft.
 
@@ -450,8 +453,10 @@ where HASH is the hash generated earlier
 
 `sudo update-grub`
 
+
 # Conclusion
---------------------------
+
+
 Personally i think there is never a good reason to not encrypt your data if you care about it, just like there is never a good reason to use HTTP over HTTPS or to send out an unencrypted email, encrypting data-at-rest is just as important as encrypting data-in-transit.
 Windows did a good job by implementing Bitlocker for drive encryption, TPM, Secure Boot, Trusted Boot, Measured Boot all to prevent bootkits, rootkits and any kind of tampering with the boot process and we have taken a similar approach with our Arch Linux Installation to protect ourselves against those attacks.
 
