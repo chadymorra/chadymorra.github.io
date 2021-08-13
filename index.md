@@ -193,7 +193,7 @@ swap        /dev/sda2        /dev/urandom        swap,offset=2048,cipher=aes-xts
  
 -> chroot into the new root directory
 
-` arch-chroot /mnt /bin/bash`
+`arch-chroot /mnt /bin/bash`
 
 -> localtime + syncing hardware clock + hostname
 ```
