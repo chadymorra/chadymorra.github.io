@@ -1,5 +1,5 @@
 # Introduction:
-
+-------------------
 
 This is a documentation for an arch-linux installation from a security standpoint using BTRFS filesystem instead of LVM on Full Disk Encryption including /boot using LUKS.
 
@@ -17,9 +17,12 @@ In order to give some context and understand why we are doing this, we must firs
 
 Please keep in mind that even though we take as much security measures as we can to protect ourselves against threats, in the case of physical access to a device for a good duration of time, nothing will 100% guarantee your security but we will definetly make it extremly hard for anyone to access it :)
 
------------
+
+
 
 # Plan:
+--------------------
+
 
 
 | partition		| mount			| Encrypted |
@@ -32,7 +35,7 @@ Please keep in mind that even though we take as much security measures as we can
 1. Only keep /boot/efi our ESP parition unencrypted.
  2. will need to decrypt at the GRUB level.
 3. will need to use LUKS 1 to encrypt our system partition(since 2019 GRUB does not support LUKS2).
-4.  our bootloader is still an attack vector at this point, then we can address this 			  	problem by using UEFI secure boot, enroll our own Secure Boot keys and sign GRUB bootloader with our keys.
+4.  our bootloader is still an attack vector at this point, then we can address this problem by using UEFI secure boot, enroll our own Secure Boot keys and sign GRUB bootloader with our keys.
 
 #### Note:  
 >The passphrase cannot be passed on from Grub to initramfs so we will need to enter our passphrase twice: one time for grub to unlock the  encrypted root partition and another time for initramfs, the reason for that is that we currently do not have a secure way to pass our passphrase from GRUB down to initramfs unless we can embedd our secure key file in our initramfs, then we only need to enter our passphrase once. 
@@ -40,7 +43,7 @@ Please keep in mind that even though we take as much security measures as we can
 
 -----
 #### what about SWAP?
- we will have our swap encrypted with a random key file from /dev/urandom and reinitialized at boot (no suspend-to-disk). 
+- we will have our swap encrypted with a random key file from /dev/urandom and reinitialized at boot (no suspend-to-disk). 
 
 #### Why BTRFS?
 
@@ -50,20 +53,19 @@ Please keep in mind that even though we take as much security measures as we can
 - Integrated multiple device support + RAID
 - deduplication
 	just to name a few...
-
-
---------------
-
-# Implementation:
-
-
-Few notes worth mentioning:
+	
+	
+#### Few notes worth mentioning:
 - practice this on a virtual machine first.
 - using snapshots can be very helpful.
 - documenting your steps will help you with two things: understanding better and easier  troubleshooting.
 - I will be using UEFI with GPT but if you decide to go with something else please make note of the below:
 	-> For [BIOS/GPT systems](https://wiki.archlinux.org/title/GRUB#GUID_Partition_Table_(GPT)_specific_instructions "GRUB") create a [BIOS boot partition](https://wiki.archlinux.org/title/BIOS_boot_partition "BIOS boot partition") with size of 1 MiB for GRUB to store the second stage of BIOS bootloader. Do not mount the partition. For BIOS/MBR systems this is not necessary.
 	-> For [UEFI systems](https://wiki.archlinux.org/title/GRUB#UEFI_systems "GRUB") create an [EFI system partition](https://wiki.archlinux.org/title/EFI_system_partition "EFI system partition") with an appropriate size, it will later be mounted at /boot/efi
+
+
+# Introduction:
+---------------------------
 
 -> Download arch linux installation image from [here](https://archlinux.org/download/)
 
