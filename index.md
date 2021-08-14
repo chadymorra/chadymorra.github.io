@@ -23,7 +23,6 @@ In order to give some context and understand why we are doing this, we must firs
 
 Please keep in mind that even though we take as much security measures as we can to protect ourselves against threats, in the case of physical access to a device for a good duration of time, nothing will 100% guarantee your security but we will definetly make it extremly hard for anyone to access it :)  
 <br/><br/>
-<br/><br/>
 
 # Plan
 
