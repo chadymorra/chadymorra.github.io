@@ -1,8 +1,5 @@
 {% seo %}
 
-* Do not remove this line (it will not be displayed)
-{:toc}
-
 
 
 # Introduction:
@@ -44,14 +41,14 @@ Please keep in mind that even though we take as much security measures as we can
 3. will need to use LUKS 1 to encrypt our system partition(since 2019 GRUB does not support LUKS2).
 4.  our bootloader is still an attack vector at this point, then we can address this problem by using UEFI secure boot, enroll our own Secure Boot keys and sign the kernel and GRUB with our keys.
 
- **Note:**  
+ #### Note:    
 >The passphrase cannot be passed on from Grub to initramfs so we will need to enter our passphrase twice: one time for grub to unlock the  encrypted root partition and another time for initramfs, the reason for that is that we currently do not have a secure way to pass our passphrase from GRUB down to initramfs unless we can embedd our secure key file in our initramfs, then we only need to enter our passphrase once. 
 
 
-**what about SWAP?**  
+#### what about SWAP?  
 - we will have our swap encrypted with a random key file from /dev/urandom and reinitialized at boot (no suspend-to-disk). 
 
-**Why BTRFS?**  
+#### Why BTRFS?     
 
  - CoW filesystem(no data loss)
 - Writable snapshots and read-only snapshots
@@ -61,7 +58,7 @@ Please keep in mind that even though we take as much security measures as we can
 	just to name a few...
 	
 	
- **Few notes worth mentioning:**
+ #### Few notes worth mentioning:
 - practice this on a virtual machine first.
 - using snapshots can be very helpful.
 - documenting your steps will help you with two things: understanding better and easier  troubleshooting.
@@ -151,7 +148,7 @@ cryptsetup close to_be_wiped
  mkfs.btrfs --force --label cryptroot /dev/mapper/cryptroot
 ```
 
-**Warning:**
+#### Warning:
 > Notice how LUKS prompts you to enter a passphrase and not a password, [this](https://protonmail.com/blog/protonmail-com-blog-password-vs-passphrase/) is a good article that explains the difference, generally speaking humans are terrible at creating strong passwords with good entropy and remembering it and that's why we use password managers, but another option would be using passphrases 4-5 words chosen at random, example: "correct horse battery staple" 
 
 -> Creating subvolumes:
@@ -244,7 +241,7 @@ hwclock --systohc --utc
 ```
 
 
-**Warning:**  
+#### Warning:    
 >we are embedding our key file to the initramfs only because we are expected to enter our passphrase at the grub level (before initramfs and the kernel are loaded) already and a 2nd time at the initramfs level so it makes sense to embed a keyfile into our initramfs in order to avoid this redundancy.
 Please do NOT embed a key file on your disk and use it to decrypt it without requiring a passphrase at an earlier level because it kind of defeats the purpose of encrypting your disk, if all that is required to decrypt it is.. booting your computer.(Unless you are storing your keyfile on a usb drive for example) 
 
@@ -272,7 +269,7 @@ GRUB_CMDLINE_LINUX="... cryptkey=rootfs:/root/secrets/crypto_keyfile.bin"
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
-### Side Note:
+#### Side Note:
 > But wait, how can we decrypt the same partition using a passphrase and then later using a keyfile with some /dev/urandom in it?!
 The answer to that is: well that's how LUKS work:
 >* it has 8 key slots stored in the partition header for multiple passphrases(for multiple users).
@@ -289,7 +286,6 @@ The answer to that is: well that's how LUKS work:
 `useradd -m -G wheel -s /bin/bash <user>`
 `passwd <user>`
 
-<!-- toc-ignore -->
 
 # Post-Installation
 
@@ -314,8 +310,8 @@ pacman -S efitools
 uuidgen --random > guid.txt
 ```
 
-<!-- toc-ignore -->
-#### -> Please note the below:
+
+#### Please note the below:
 
 \*.key : PEM format private keys for EFI binary and EFI signature list signing.
 \*.crt : PEM format public keys for sbsign.
