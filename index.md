@@ -86,8 +86,9 @@ personally i like to ssh into the device because it allows me to do the installa
 * `ssh root@ip` ssh into it.
 
 -> Set the keyboard layout
+if you are using ssh, then the ssh client sends the keys after they have already been interpreted according to your local keymap, so if you want to change your keymap throughout your ssh session, then you will need to run this command before connecting with ssh.
 
-`loadkeys de-latin1`
+`loadkeys us`
 
 -> verify that we have booted into UEFI mode
 
