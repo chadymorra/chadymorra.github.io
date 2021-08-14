@@ -12,14 +12,14 @@ In order to give some context and understand why we are doing this, we must firs
 
 #### Device theft leading to sensitive data exposure
 
-* A threat actor stealing your device, getting access to your data and blackmailing you for money if they find something interesting (worth much more than the actual device).
-* A threat actor stealing your device, getting access to your company files that include financials and other company secrets.
-* A threat actor stealing your device, getting access to your private keys and passwords.
+  * A threat actor stealing your device, getting access to your data and blackmailing you for money if they find something interesting (worth much more than the actual device).
+  * A threat actor stealing your device, getting access to your company files that include financials and other company secrets.
+  * A threat actor stealing your device, getting access to your private keys and passwords.
 
 #### Physical access to device for a period of time
 
-* A threat actor with physical access to your device installs a rootkit/backdoor on it.
-* A threat actor with physical access to your device exfiltrates sensitive data from your disk. (worse than stealing because you would not be aware that data has been leaked)
+  * A threat actor with physical access to your device installs a rootkit/backdoor on it.
+  * A threat actor with physical access to your device exfiltrates sensitive data from your disk. (worse than stealing because you would not be aware that data has been leaked)
 
 Please keep in mind that even though we take as much security measures as we can to protect ourselves against threats, in the case of physical access to a device for a good duration of time, nothing will 100% guarantee your security but we will definetly make it extremly hard for anyone to access it :)  
 <br/>
@@ -46,24 +46,24 @@ Please keep in mind that even though we take as much security measures as we can
 
 
 ### what about SWAP?  
-- we will have our swap encrypted with a random key file from /dev/urandom and reinitialized at boot (no suspend-to-disk). 
+  - we will have our swap encrypted with a random key file from /dev/urandom and reinitialized at boot (no suspend-to-disk). 
 
 
 ### Why BTRFS?     
 
- - CoW filesystem(no data loss)
-- Writable snapshots and read-only snapshots
-- Dynamic inode allocation
-- Integrated multiple device support + RAID
-- deduplication
+  - CoW filesystem(no data loss)
+  - Writable snapshots and read-only snapshots
+  - Dynamic inode allocation
+  - Integrated multiple device support + RAID
+  - deduplication
 	just to name a few...
 	
 	
 ### Few notes worth mentioning:
-- practice this on a virtual machine first.
-- using snapshots can be very helpful.
-- documenting your steps will help you with two things: understanding better and easier  troubleshooting.
-- I will be using UEFI with GPT but if you decide to go with something else please make note of the below:
+  - practice this on a virtual machine first.
+  - using snapshots can be very helpful.
+  - documenting your steps will help you with two things: understanding better and easier  troubleshooting.
+  - I will be using UEFI with GPT but if you decide to go with something else please make note of the below:
 	-> For [BIOS/GPT systems](https://wiki.archlinux.org/title/GRUB#GUID_Partition_Table_(GPT)_specific_instructions "GRUB") create a [BIOS boot partition](https://wiki.archlinux.org/title/BIOS_boot_partition "BIOS boot partition") with size of 1 MiB for GRUB to store the second stage of BIOS bootloader. Do not mount the partition. For BIOS/MBR systems this is not necessary.
 	-> For [UEFI systems](https://wiki.archlinux.org/title/GRUB#UEFI_systems "GRUB") create an [EFI system partition](https://wiki.archlinux.org/title/EFI_system_partition "EFI system partition") with an appropriate size, it will later be mounted at /boot/efi
 
@@ -85,10 +85,10 @@ Please keep in mind that even though we take as much security measures as we can
 
 personally i like to ssh into the device because it allows me to do the installation  & read documentation from the same workstation, i can also copy and paste into it from my clipboard, zoom in, etc.. sshd should be enabled and started but otherwise you can use:
 
-* `systemctl start sshd` to start the ssh daemon.
-* `ip a s` to take note of the device's ip address.
-* `passwd` to reset root's password.
-* `ssh root@ip` ssh into it.
+  * `systemctl start sshd` to start the ssh daemon.
+  * `ip a s` to take note of the device's ip address.
+  * `passwd` to reset root's password.
+  * `ssh root@ip` ssh into it.
 
 - Set the keyboard layout:
 
