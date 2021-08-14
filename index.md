@@ -62,7 +62,7 @@ Please keep in mind that even though we take as much security measures as we can
 	just to name a few...
 	
 	
-#### Few notes worth mentioning:
+ **Few notes worth mentioning:**
 - practice this on a virtual machine first.
 - using snapshots can be very helpful.
 - documenting your steps will help you with two things: understanding better and easier  troubleshooting.
@@ -245,7 +245,7 @@ hwclock --systohc --utc
 ```
 
 
-#### Warning: 
+**Warning:**  
 >we are embedding our key file to the initramfs only because we are expected to enter our passphrase at the grub level (before initramfs and the kernel are loaded) already and a 2nd time at the initramfs level so it makes sense to embed a keyfile into our initramfs in order to avoid this redundancy.
 Please do NOT embed a key file on your disk and use it to decrypt it without requiring a passphrase at an earlier level because it kind of defeats the purpose of encrypting your disk, if all that is required to decrypt it is.. booting your computer.(Unless you are storing your keyfile on a usb drive for example) 
 
