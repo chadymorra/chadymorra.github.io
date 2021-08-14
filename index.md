@@ -1,5 +1,12 @@
 {% seo %}
 
+# Table of Contents
+1. [Introduction](#Introduction)
+2. [Plan](#Plan)
+3. [Installation](#Installation)
+4. [Post Installation](#Post Installation)
+5. [Conclusion](#Conclusion)
+
 # Introduction:
 
 
