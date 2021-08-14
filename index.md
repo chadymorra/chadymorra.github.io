@@ -22,7 +22,7 @@ In order to give some context and understand why we are doing this, we must firs
 * A threat actor with physical access to your device exfiltrates sensitive data from your disk. (worse than stealing because you would not be aware that data has been leaked)
 
 Please keep in mind that even though we take as much security measures as we can to protect ourselves against threats, in the case of physical access to a device for a good duration of time, nothing will 100% guarantee your security but we will definetly make it extremly hard for anyone to access it :)  
-<br/><br/>
+<br/>
 
 # Plan
 
@@ -67,7 +67,7 @@ Please keep in mind that even though we take as much security measures as we can
 	-> For [BIOS/GPT systems](https://wiki.archlinux.org/title/GRUB#GUID_Partition_Table_(GPT)_specific_instructions "GRUB") create a [BIOS boot partition](https://wiki.archlinux.org/title/BIOS_boot_partition "BIOS boot partition") with size of 1 MiB for GRUB to store the second stage of BIOS bootloader. Do not mount the partition. For BIOS/MBR systems this is not necessary.
 	-> For [UEFI systems](https://wiki.archlinux.org/title/GRUB#UEFI_systems "GRUB") create an [EFI system partition](https://wiki.archlinux.org/title/EFI_system_partition "EFI system partition") with an appropriate size, it will later be mounted at /boot/efi
 
-<br/><br/>
+<br/>
 
 # Installation
 
@@ -296,7 +296,7 @@ The answer to that is: well that's how LUKS work:
 `useradd -m -G wheel -s /bin/bash <user>`
 `passwd <user>`
 
-<br/><br/>
+<br/>
 # Post-Installation
 
 
