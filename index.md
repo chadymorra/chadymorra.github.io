@@ -316,7 +316,7 @@ uuidgen --random > guid.txt
 * cert-to-efi-sig-list will convert a certificate to a EFI signature list
 * sign-efi-sig-list is used to sign our EFI signature list with our private key 
 
-Before going with this manually, Rod Smith has created this [script](https://www.rodsbooks.com/efi-bootloaders/mkkeys.sh) that creates the keys that we need in, required python3 thought but we can fix this by replacing:
+Before going with this manually, Rod Smith has created this [script](https://www.rodsbooks.com/efi-bootloaders/mkkeys.sh) that creates the keys that we need, it requires python3 though but we can fix this by replacing:
 ```
 GUID=`python3 -c 'import uuid; print(str(uuid.uuid1()))'`
 ```
