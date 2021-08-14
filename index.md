@@ -76,7 +76,7 @@ Please keep in mind that even though we take as much security measures as we can
 * deduplication
  just to name a few...
  
-#### Few notes worth mentioning
+ ### Few notes worth mentioning
 
 - practice this on a virtual machine first.
 * using snapshots can be very helpful.
@@ -167,7 +167,7 @@ cryptsetup close to_be_wiped
  mkfs.btrfs --force --label cryptroot /dev/mapper/cryptroot
 ```
 
-#### Warning
+### Warning
 
 > Notice how LUKS prompts you to enter a passphrase and not a password, [this](https://protonmail.com/blog/protonmail-com-blog-password-vs-passphrase/) is a good article that explains the difference, generally speaking humans are terrible at creating strong passwords with good entropy and remembering it and that's why we use password managers, but another option would be using passphrases 4-5 words chosen at random, example: "correct horse battery staple"
 
@@ -262,7 +262,7 @@ hwclock --systohc --utc
 * cryptsetup -v luksAddKey -i 1 /dev/sda3 /root/secrets/crypto_keyfile.bin
 ```
 
-#### Warning
+### Warning
 
 >we are embedding our key file to the initramfs only because we are expected to enter our passphrase at the grub level (before initramfs and the kernel are loaded) already and a 2nd time at the initramfs level so it makes sense to embed a keyfile into our initramfs in order to avoid this redundancy.
 Please do NOT embed a key file on your disk and use it to decrypt it without requiring a passphrase at an earlier level because it kind of defeats the purpose of encrypting your disk, if all that is required to decrypt it is.. booting your computer.(Unless you are storing your keyfile on a usb drive for example)
@@ -293,7 +293,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
 
-#### Side Note:
+### Side Note:
 
 > But wait, how can we decrypt the same partition using a passphrase and then later using a keyfile with some /dev/urandom in it?!
 The answer to that is: well that's how LUKS work:
@@ -336,7 +336,7 @@ uuidgen --random > guid.txt
 ```
 
 
-#### Please note the below:
+### Please note the below:
 
 \*.key : PEM format private keys for EFI binary and EFI signature list signing.
 \*.crt : PEM format public keys for sbsign.
