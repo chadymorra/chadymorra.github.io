@@ -265,6 +265,9 @@ FILES=(/root/secrets/crypto_keyfile.bin)
 
 mkinitcpio -p linux
 ```
+### Image below shows our crypto_keyfile embedded inside initramfs
+
+[!crypto_keyfile](crypto_keyfile.png)
 
 -> Regenerate GRUB
 
