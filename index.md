@@ -1,15 +1,8 @@
 {% seo %}
 
-<<<<<<< Updated upstream
 
-
-# Introduction:
-
-=======
 # Introduction
 
--------------------
->>>>>>> Stashed changes
 
 This is a documentation for an arch-linux installation from a security standpoint using BTRFS filesystem instead of LVM on Full Disk Encryption including /boot using LUKS.
 
@@ -30,14 +23,6 @@ Please keep in mind that even though we take as much security measures as we can
 
 # Plan
 
-<<<<<<< Updated upstream
-
-
-# Plan:
-
-=======
---------------------
->>>>>>> Stashed changes
 
 | partition  | mount   | Encrypted |
 |---------------|---------------|-----------|    
@@ -50,27 +35,20 @@ Please keep in mind that even though we take as much security measures as we can
 3. will need to use LUKS 1 to encrypt our system partition(since 2019 GRUB does not support LUKS2).
 4. our bootloader is still an attack vector at this point, then we can address this problem by using UEFI secure boot, enroll our own Secure Boot keys and sign the kernel and GRUB with our keys.
 
-<<<<<<< Updated upstream
+
  #### Note:    
 >The passphrase cannot be passed on from Grub to initramfs so we will need to enter our passphrase twice: one time for grub to unlock the  encrypted root partition and another time for initramfs, the reason for that is that we currently do not have a secure way to pass our passphrase from GRUB down to initramfs unless we can embedd our secure key file in our initramfs, then we only need to enter our passphrase once. 
-=======
-#### Note  
->>>>>>> Stashed changes
+
 
 >The passphrase cannot be passed on from Grub to initramfs so we will need to enter our passphrase twice: one time for grub to unlock the  encrypted root partition and another time for initramfs, the reason for that is that we currently do not have a secure way to pass our passphrase from GRUB down to initramfs unless we can embedd our secure key file in our initramfs, then we only need to enter our passphrase once.
 
-<<<<<<< Updated upstream
+
 #### what about SWAP?  
 - we will have our swap encrypted with a random key file from /dev/urandom and reinitialized at boot (no suspend-to-disk). 
-=======
-#### what about SWAP?
 
-- we will have our swap encrypted with a random key file from /dev/urandom and reinitialized at boot (no suspend-to-disk).
->>>>>>> Stashed changes
 
 #### Why BTRFS?     
 
-<<<<<<< Updated upstream
  - CoW filesystem(no data loss)
 - Writable snapshots and read-only snapshots
 - Dynamic inode allocation
@@ -86,11 +64,10 @@ Please keep in mind that even though we take as much security measures as we can
 - I will be using UEFI with GPT but if you decide to go with something else please make note of the below:
 	-> For [BIOS/GPT systems](https://wiki.archlinux.org/title/GRUB#GUID_Partition_Table_(GPT)_specific_instructions "GRUB") create a [BIOS boot partition](https://wiki.archlinux.org/title/BIOS_boot_partition "BIOS boot partition") with size of 1 MiB for GRUB to store the second stage of BIOS bootloader. Do not mount the partition. For BIOS/MBR systems this is not necessary.
 	-> For [UEFI systems](https://wiki.archlinux.org/title/GRUB#UEFI_systems "GRUB") create an [EFI system partition](https://wiki.archlinux.org/title/EFI_system_partition "EFI system partition") with an appropriate size, it will later be mounted at /boot/efi
-<!-- toc-ignore -->
+
 
 # Installation:
 
-=======
 * CoW filesystem(no data loss)
 * Writable snapshots and read-only snapshots
 * Dynamic inode allocation
@@ -109,8 +86,6 @@ Please keep in mind that even though we take as much security measures as we can
 
 # Installation
 
----------------------------
->>>>>>> Stashed changes
 
 -> Download arch linux installation image from [here](https://archlinux.org/download/)
 
@@ -288,10 +263,6 @@ hwclock --systohc --utc
 
 #### Warning
 
-<<<<<<< Updated upstream
-#### Warning:    
-=======
->>>>>>> Stashed changes
 >we are embedding our key file to the initramfs only because we are expected to enter our passphrase at the grub level (before initramfs and the kernel are loaded) already and a 2nd time at the initramfs level so it makes sense to embed a keyfile into our initramfs in order to avoid this redundancy.
 Please do NOT embed a key file on your disk and use it to decrypt it without requiring a passphrase at an earlier level because it kind of defeats the purpose of encrypting your disk, if all that is required to decrypt it is.. booting your computer.(Unless you are storing your keyfile on a usb drive for example)
 
@@ -320,12 +291,9 @@ GRUB_CMDLINE_LINUX="... cryptkey=rootfs:/root/secrets/crypto_keyfile.bin"
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
-<<<<<<< Updated upstream
-#### Side Note:
-=======
-### Side Note
 
->>>>>>> Stashed changes
+#### Side Note:
+
 > But wait, how can we decrypt the same partition using a passphrase and then later using a keyfile with some /dev/urandom in it?!
 The answer to that is: well that's how LUKS work:
 >
@@ -343,12 +311,9 @@ The answer to that is: well that's how LUKS work:
 `useradd -m -G wheel -s /bin/bash <user>`
 `passwd <user>`
 
-<<<<<<< Updated upstream
 
 # Post-Installation
-=======
-# Post Installation
->>>>>>> Stashed changes
+
 
 At this point we have finished our installation, I will not go into post installation procedures because it is already covered in the Arch Linux wiki but we can confidently say that we have a fully encrypted disk by now and we have protected ourselves from data leaks in case of device theft.
 
@@ -369,12 +334,8 @@ pacman -S efitools
 uuidgen --random > guid.txt
 ```
 
-<<<<<<< Updated upstream
 
 #### Please note the below:
-=======
-#### -> Please note the below
->>>>>>> Stashed changes
 
 \*.key : PEM format private keys for EFI binary and EFI signature list signing.
 \*.crt : PEM format public keys for sbsign.
@@ -392,7 +353,6 @@ Before going with this manually, Rod Smith has made this [script](https://www.ro
 =======
 Before going with this manually, Rod Smith has created this [script](https://www.rodsbooks.com/efi-bootloaders/mkkeys.sh) that creates the keys that we need, it requires python3 though but we can fix this by replacing:
 
->>>>>>> Stashed changes
 ```
 GUID=`python3 -c 'import uuid; print(str(uuid.uuid1()))'`
 ```
@@ -534,10 +494,6 @@ EOF
 where HASH is the hash generated earlier
 
 `sudo update-grub`
-<<<<<<< Updated upstream
-<!-- toc-ignore -->
-=======
->>>>>>> Stashed changes
 
 # Conclusion
 
