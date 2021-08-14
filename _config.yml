@@ -3,6 +3,6 @@ plugins:
   - jekyll-seo-tag
 title: Secured Arch Linux Installation
 description: Arch Linux installation using BTRFS on Full Disk Encryption and Secure Boot
-google_analytics: G-KSLZR1RJLE
+google_analytics: UA-204934289-1
 markdown: kramdown
 author: Chady Morra
