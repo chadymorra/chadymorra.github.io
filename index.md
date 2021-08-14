@@ -485,5 +485,5 @@ Personally i think there is never a good reason to not encrypt your data if you 
 Windows did a good job by implementing Bitlocker for drive encryption, TPM, Secure Boot, Trusted Boot, Measured Boot all to prevent bootkits, rootkits and any kind of tampering with the boot process and we have taken a similar approach with our Arch Linux Installation to protect ourselves against those attacks.
 
 --------------------------
-<br></br>
+<br/>
 Chady MORRA, 8/14/2021
