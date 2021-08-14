@@ -82,10 +82,10 @@ Please keep in mind that even though we take as much security measures as we can
 
 personally i like to ssh into the device because it allows me to do the installation  & read documentation from the same workstation, i can also copy and paste into it from my clipboard, zoom in, etc.. sshd should be enabled and started but otherwise you can use:
 
-  * `systemctl start sshd` to start the ssh daemon.
-  * `ip a s` to take note of the device's ip address.
-  * `passwd` to reset root's password.
-  * `ssh root@ip` ssh into it.
+  - `systemctl start sshd` to start the ssh daemon.
+  - `ip a s` to take note of the device's ip address.
+  - `passwd` to reset root's password.
+  - `ssh root@ip` ssh into it.
 
 - Set the keyboard layout:
 
