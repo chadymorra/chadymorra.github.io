@@ -1,7 +1,7 @@
 {% seo %}
 
 # Introduction:
--------------------
+
 
 This is a documentation for an arch-linux installation from a security standpoint using BTRFS filesystem instead of LVM on Full Disk Encryption including /boot using LUKS.
 
@@ -23,7 +23,7 @@ Please keep in mind that even though we take as much security measures as we can
 
 
 # Plan:
---------------------
+
 
 
 
@@ -66,7 +66,7 @@ Please keep in mind that even though we take as much security measures as we can
 
 
 # Installation:
----------------------------
+
 
 -> Download arch linux installation image from [here](https://archlinux.org/download/)
 
