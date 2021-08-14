@@ -27,7 +27,7 @@ Please keep in mind that even though we take as much security measures as we can
 # Plan
 
 
-| partition  | mount   | Encrypted |
+| **partition**  | **mount**   | **Encrypted** |
 |---------------|---------------|-----------|    
 | /dev/sda1  | /boot/efi  |  NO |
 | /dev/sda2  | /swap   |  YES   |
@@ -133,7 +133,7 @@ cryptsetup close to_be_wiped
 
 ``cfdisk /dev/sda``
 
-| size             | type  
+| **size**             | **type**  
 |------------------------------|--------------------
 |550MB for ESP partition     |  EFI system
 |8GB for swap partition       |    Linux swap
