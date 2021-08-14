@@ -85,8 +85,7 @@ personally i like to ssh into the device because it allows me to do the installa
 * `passwd` to reset root's password.
 * `ssh root@ip` ssh into it.
 
--> Set the keyboard layout
-if you are using ssh, then the ssh client sends the keys after they have already been interpreted according to your local keymap, so if you want to change your keymap throughout your ssh session, then you will need to run this command before connecting with ssh.
+-> Set the keyboard layout:
 
 `loadkeys us`
 
@@ -206,7 +205,13 @@ swap        /dev/sda2        /dev/urandom        swap,offset=2048,cipher=aes-xts
 hwclock --systohc --utc
 
  echo arch > /etc/hostname
+ 
+ edit /etc/hosts file and match that accordingly 
 ```
+
+-> Edit /etc/locale.gen and uncomment en_US.UTF-8 UTF-8 and other needed locales. Generate the locales by running:
+
+ `locale-gen`
 
 -> Installing GRUB
 ```
