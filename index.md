@@ -298,6 +298,8 @@ useradd -m -G wheel -s /bin/bash <user>`
 passwd <user>
 ```
 
+![encrypt_hook](encrypt_hook.png)
+
 <br/>
 # Post-Installation
 
