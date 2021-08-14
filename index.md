@@ -37,7 +37,7 @@ Please keep in mind that even though we take as much security measures as we can
 1. Only keep /boot/efi our ESP parition unencrypted.
  2. will need to decrypt at the GRUB level.
 3. will need to use LUKS 1 to encrypt our system partition(since 2019 GRUB does not support LUKS2).
-4.  our bootloader is still an attack vector at this point, then we can address this problem by using UEFI secure boot, enroll our own Secure Boot keys and sign GRUB bootloader with our keys.
+4.  our bootloader is still an attack vector at this point, then we can address this problem by using UEFI secure boot, enroll our own Secure Boot keys and sign the kernel and GRUB with our keys.
 
 #### Note:  
 >The passphrase cannot be passed on from Grub to initramfs so we will need to enter our passphrase twice: one time for grub to unlock the  encrypted root partition and another time for initramfs, the reason for that is that we currently do not have a secure way to pass our passphrase from GRUB down to initramfs unless we can embedd our secure key file in our initramfs, then we only need to enter our passphrase once. 
