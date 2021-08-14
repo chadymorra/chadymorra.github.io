@@ -4,7 +4,7 @@
 1. [Introduction](#Introduction)
 2. [Plan](#Plan)
 3. [Installation](#Installation)
-4. [Post Installation](#Post Installation)
+4. [Post-Installation](#Post-Installation)
 5. [Conclusion](#Conclusion)
 
 # Introduction:
@@ -293,7 +293,7 @@ The answer to that is: well that's how LUKS work:
 
 
 
-# Post Installation
+# Post-Installation
 
 
 At this point we have finished our installation, I will not go into post installation procedures because it is already covered in the Arch Linux wiki but we can confidently say that we have a fully encrypted disk by now and we have protected ourselves from data leaks in case of device theft.
