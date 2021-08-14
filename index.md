@@ -44,11 +44,11 @@ Please keep in mind that even though we take as much security measures as we can
 >The passphrase cannot be passed on from Grub to initramfs so we will need to enter our passphrase twice: one time for grub to unlock the  encrypted root partition and another time for initramfs, the reason for that is that we currently do not have a secure way to pass our passphrase from GRUB down to initramfs unless we can embedd our secure key file in our initramfs, then we only need to enter our passphrase once.
 
 
-#### what about SWAP?  
+### what about SWAP?  
 - we will have our swap encrypted with a random key file from /dev/urandom and reinitialized at boot (no suspend-to-disk). 
 
 
-#### Why BTRFS?     
+### Why BTRFS?     
 
  - CoW filesystem(no data loss)
 - Writable snapshots and read-only snapshots
@@ -58,7 +58,7 @@ Please keep in mind that even though we take as much security measures as we can
 	just to name a few...
 	
 	
- #### Few notes worth mentioning:
+ ### Few notes worth mentioning:
 - practice this on a virtual machine first.
 - using snapshots can be very helpful.
 - documenting your steps will help you with two things: understanding better and easier  troubleshooting.
@@ -349,10 +349,9 @@ uuidgen --random > guid.txt
 * cert-to-efi-sig-list will convert a certificate to a EFI signature list
 * sign-efi-sig-list is used to sign our EFI signature list with our private key
 
-<<<<<<< Updated upstream
+
 Before going with this manually, Rod Smith has made this [script](https://www.rodsbooks.com/efi-bootloaders/mkkeys.sh) that creates the keys that we need, it requires python3 though but we can fix this by replacing:
-=======
-Before going with this manually, Rod Smith has created this [script](https://www.rodsbooks.com/efi-bootloaders/mkkeys.sh) that creates the keys that we need, it requires python3 though but we can fix this by replacing:
+
 
 ```
 GUID=`python3 -c 'import uuid; print(str(uuid.uuid1()))'`
