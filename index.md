@@ -22,7 +22,6 @@ In order to give some context and understand why we are doing this, we must firs
 * A threat actor with physical access to your device exfiltrates sensitive data from your disk. (worse than stealing because you would not be aware that data has been leaked)
 
 Please keep in mind that even though we take as much security measures as we can to protect ourselves against threats, in the case of physical access to a device for a good duration of time, nothing will 100% guarantee your security but we will definetly make it extremly hard for anyone to access it :)  
-------------------------------------------------------------------------------------------------------------------------------
 <br/><br/>
 
 # Plan
