@@ -293,8 +293,10 @@ The answer to that is: well that's how LUKS work:
 
 -> Create User
 
-`useradd -m -G wheel -s /bin/bash <user>`
-`passwd <user>`
+```
+useradd -m -G wheel -s /bin/bash <user>`
+passwd <user>
+```
 
 <br/>
 # Post-Installation
