@@ -72,16 +72,16 @@ Please keep in mind that even though we take as much security measures as we can
 # Installation
 
 
--> Download arch linux installation image from [here](https://archlinux.org/download/)
+- Download arch linux installation image from [here](https://archlinux.org/download/)
 
--> Verify signature
+- Verify signature
 `gpg --keyserver-options auto-key-retrieve --verify archlinux-_version_-x86_64.iso.sig`
 
--> Prepare an installation media
+- Prepare an installation media
 
--> Boot into the live enviroment
+- Boot into the live enviroment
 
-->OPTIONAL:
+- OPTIONAL:
 
 personally i like to ssh into the device because it allows me to do the installation  & read documentation from the same workstation, i can also copy and paste into it from my clipboard, zoom in, etc.. sshd should be enabled and started but otherwise you can use:
 
@@ -90,11 +90,11 @@ personally i like to ssh into the device because it allows me to do the installa
 * `passwd` to reset root's password.
 * `ssh root@ip` ssh into it.
 
--> Set the keyboard layout:
+- Set the keyboard layout:
 
 `loadkeys us`
 
--> verify that we have booted into UEFI mode
+- verify that we have booted into UEFI mode
 
 `ls /sys/firmware/efi/efivars`
 
