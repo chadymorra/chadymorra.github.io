@@ -276,6 +276,10 @@ GRUB_CMDLINE_LINUX="... cryptkey=rootfs:/root/secrets/crypto_keyfile.bin"
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
+### The cryptkey parameter we are passing in our grub, will be picked up by the encrypt hook that we included in our initramfs
+
+![encrypt_hook](encrypt_hook.png)
+
 
 ### Side Note:
 
@@ -298,7 +302,6 @@ useradd -m -G wheel -s /bin/bash <user>`
 passwd <user>
 ```
 
-![encrypt_hook](encrypt_hook.png)
 
 <br/>
 # Post-Installation
