@@ -43,15 +43,15 @@ Please keep in mind that even though we take as much security measures as we can
  2. will need to decrypt at the GRUB level.
 3. will need to use LUKS 1 to encrypt our system partition(since 2019 GRUB does not support LUKS2).
 4.  our bootloader is still an attack vector at this point, then we can address this problem by using UEFI secure boot, enroll our own Secure Boot keys and sign the kernel and GRUB with our keys.
-<!-- toc-ignore -->
-#### Note:  
+
+ **Note:**  
 >The passphrase cannot be passed on from Grub to initramfs so we will need to enter our passphrase twice: one time for grub to unlock the  encrypted root partition and another time for initramfs, the reason for that is that we currently do not have a secure way to pass our passphrase from GRUB down to initramfs unless we can embedd our secure key file in our initramfs, then we only need to enter our passphrase once. 
 
 
-#### what about SWAP?
+**what about SWAP?**  
 - we will have our swap encrypted with a random key file from /dev/urandom and reinitialized at boot (no suspend-to-disk). 
 
-#### Why BTRFS?
+**Why BTRFS?**  
 
  - CoW filesystem(no data loss)
 - Writable snapshots and read-only snapshots
@@ -150,8 +150,8 @@ cryptsetup close to_be_wiped
  swapon -L swap
  mkfs.btrfs --force --label cryptroot /dev/mapper/cryptroot
 ```
-<!-- toc-ignore -->
-#### Warning:
+
+**Warning:**
 > Notice how LUKS prompts you to enter a passphrase and not a password, [this](https://protonmail.com/blog/protonmail-com-blog-password-vs-passphrase/) is a good article that explains the difference, generally speaking humans are terrible at creating strong passwords with good entropy and remembering it and that's why we use password managers, but another option would be using passphrases 4-5 words chosen at random, example: "correct horse battery staple" 
 
 -> Creating subvolumes:
