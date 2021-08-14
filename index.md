@@ -44,7 +44,7 @@ Please keep in mind that even though we take as much security measures as we can
  2. will need to decrypt at the GRUB level.
 3. will need to use LUKS 1 to encrypt our system partition(since 2019 GRUB does not support LUKS2).
 4.  our bootloader is still an attack vector at this point, then we can address this problem by using UEFI secure boot, enroll our own Secure Boot keys and sign the kernel and GRUB with our keys.
-
+<!-- toc-ignore -->
 #### Note:  
 >The passphrase cannot be passed on from Grub to initramfs so we will need to enter our passphrase twice: one time for grub to unlock the  encrypted root partition and another time for initramfs, the reason for that is that we currently do not have a secure way to pass our passphrase from GRUB down to initramfs unless we can embedd our secure key file in our initramfs, then we only need to enter our passphrase once. 
 
@@ -69,7 +69,7 @@ Please keep in mind that even though we take as much security measures as we can
 - I will be using UEFI with GPT but if you decide to go with something else please make note of the below:
 	-> For [BIOS/GPT systems](https://wiki.archlinux.org/title/GRUB#GUID_Partition_Table_(GPT)_specific_instructions "GRUB") create a [BIOS boot partition](https://wiki.archlinux.org/title/BIOS_boot_partition "BIOS boot partition") with size of 1 MiB for GRUB to store the second stage of BIOS bootloader. Do not mount the partition. For BIOS/MBR systems this is not necessary.
 	-> For [UEFI systems](https://wiki.archlinux.org/title/GRUB#UEFI_systems "GRUB") create an [EFI system partition](https://wiki.archlinux.org/title/EFI_system_partition "EFI system partition") with an appropriate size, it will later be mounted at /boot/efi
-
+<!-- toc-ignore -->
 
 # Installation:
 
@@ -151,7 +151,7 @@ cryptsetup close to_be_wiped
  swapon -L swap
  mkfs.btrfs --force --label cryptroot /dev/mapper/cryptroot
 ```
-
+<!-- toc-ignore -->
 #### Warning:
 > Notice how LUKS prompts you to enter a passphrase and not a password, [this](https://protonmail.com/blog/protonmail-com-blog-password-vs-passphrase/) is a good article that explains the difference, generally speaking humans are terrible at creating strong passwords with good entropy and remembering it and that's why we use password managers, but another option would be using passphrases 4-5 words chosen at random, example: "correct horse battery staple" 
 
@@ -290,7 +290,7 @@ The answer to that is: well that's how LUKS work:
 `useradd -m -G wheel -s /bin/bash <user>`
 `passwd <user>`
 
-
+<!-- toc-ignore -->
 
 # Post-Installation
 
@@ -315,7 +315,7 @@ pacman -S efitools
 uuidgen --random > guid.txt
 ```
 
-
+<!-- toc-ignore -->
 #### -> Please note the below:
 
 \*.key : PEM format private keys for EFI binary and EFI signature list signing.
@@ -469,7 +469,7 @@ EOF
 where HASH is the hash generated earlier
 
 `sudo update-grub`
-
+<!-- toc-ignore -->
 
 # Conclusion
 
