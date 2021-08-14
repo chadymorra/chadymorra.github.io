@@ -69,44 +69,41 @@ Please keep in mind that even though we take as much security measures as we can
 # Installation
 
 
-- Download arch linux installation image from [here](https://archlinux.org/download/)
+1. Download arch linux installation image from [here](https://archlinux.org/download/)
 
-- Verify signature
+2. Verify signature
 `gpg --keyserver-options auto-key-retrieve --verify archlinux-_version_-x86_64.iso.sig`
 
-- Prepare an installation media
+3. Prepare an installation media
 
-- Boot into the live enviroment
+4. Boot into the live enviroment
 
-- OPTIONAL:
-
-personally i like to ssh into the device because it allows me to do the installation  & read documentation from the same workstation, i can also copy and paste into it from my clipboard, zoom in, etc.. sshd should be enabled and started but otherwise you can use:
-
+- OPTIONAL: connect using ssh to be able to read & install from one single workstation also be able to copy paste commands. 
   - `systemctl start sshd` to start the ssh daemon.
   - `ip a s` to take note of the device's ip address.
   - `passwd` to reset root's password.
   - `ssh root@ip` ssh into it.
 
-- Set the keyboard layout:
+5. Set the keyboard layout:
 
 `loadkeys us`
 
-- verify that we have booted into UEFI mode
+6. verify that we have booted into UEFI mode
 
 `ls /sys/firmware/efi/efivars`
 
--> Update the system clock
+7. Update the system clock
 `timedatectl set-ntp true`
 
--> Make sure you have internet access
+8. Make sure you have internet access
 
 `ping archlinux.org`
 
--> Let's first start by securely wiping our device:
+9. Let's first start by securely wiping our device:
 
 `cryptsetup open --type plain -d /dev/urandom /dev/<block-device> to_be_wiped`
 
--> You can verify that it exists:
+10. You can verify that it exists:
 
 ```
  lsblk
@@ -116,7 +113,7 @@ sda             8:0    0  1.8T  0 disk
 └─to_be_wiped 252:0    0  1.8T  0 crypt
 ```
 
--> Wipe the container with zeros. A use of `if=/dev/urandom` is not required as the   encryption cipher is used for randomness.
+11. Wipe the container with zeros. A use of `if=/dev/urandom` is not required as the   encryption cipher is used for randomness.
 
 ```
 dd if=/dev/zero of=/dev/mapper/to_be_wiped status=progress
@@ -126,7 +123,7 @@ dd: writing to ‘/dev/mapper/to_be_wiped’: No space left on device
 cryptsetup close to_be_wiped
 ```
 
--> Partitioning (you can use any partitioning tool you want )
+12. Partitioning (you can use any partitioning tool you want )
 
 ``cfdisk /dev/sda``
 
@@ -136,7 +133,7 @@ cryptsetup close to_be_wiped
 |8GB for swap partition       |    Linux swap
 |the rest for the root partition | Linux Filesystem
 
--> Formatting:
+13. Formatting:
 
 ```
  mkfs.fat -F32 -n EFI /dev/sda1
@@ -152,7 +149,7 @@ cryptsetup close to_be_wiped
 
 > Notice how LUKS prompts you to enter a passphrase and not a password, [this](https://protonmail.com/blog/protonmail-com-blog-password-vs-passphrase/) is a good article that explains the difference, generally speaking humans are terrible at creating strong passwords with good entropy and remembering it and that's why we use password managers, but another option would be using passphrases 4-5 words chosen at random, example: "correct horse battery staple"
 
--> Creating subvolumes:
+14. Creating subvolumes:
 
 ```
  mount -t btrfs -o compress=lzo /dev/mapper/cryptroot /mnt   
@@ -168,20 +165,20 @@ cryptsetup close to_be_wiped
  mount -o compress=lzo,subvol=@snapshots,$o_btrfs /dev/mapper/cryptroot /mnt/.snapshots 
 ```
 
--> Mounting ESP partition
+15. Mounting ESP partition
 
 ```
  mkdir -p /mnt/boot/efi
  mount /dev/sda1 /mnt/boot/efi
  ```
 
--> Installing packages to our new root directory /mnt
+16. Installing packages to our new root directory /mnt
 
 ```
  pacstrap /mnt base base-devel btrfs-progs linux linux-firmware mkinitcpio nano vim dhcpcd wpa_supplicant
 ```  
 
--> fstab + crypttab
+17. fstab + crypttab
 
 ```  
   genfstab -L -p /mnt >> /mnt/etc/fstab 
@@ -197,11 +194,11 @@ cryptsetup close to_be_wiped
 swap        /dev/sda2        /dev/urandom        swap,offset=2048,cipher=aes-xts-plain64,size=256
 ```  
 
--> chroot into the new root directory
+18. chroot into the new root directory
 
 `arch-chroot /mnt /bin/bash`
 
--> localtime + syncing hardware clock + hostname
+19. localtime + syncing hardware clock + hostname
 
 ```
  ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime
@@ -213,11 +210,11 @@ hwclock --systohc --utc
  edit /etc/hosts file and match that accordingly 
 ```
 
--> Edit /etc/locale.gen and uncomment en_US.UTF-8 UTF-8 and other needed locales. Generate the locales by running:
+20. Edit /etc/locale.gen and uncomment en_US.UTF-8 UTF-8 and other needed locales. Generate the locales by running:
 
  `locale-gen`
 
--> Installing GRUB
+21. Installing GRUB
 
 ```
  pacman -S grub
@@ -235,7 +232,7 @@ hwclock --systohc --utc
  grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
--> Adding a secret key file to LUKS
+22. Adding a secret key file to LUKS
 
 ```
 * mkdir /root/secrets && chmod 700 /root/secrets
@@ -248,7 +245,7 @@ hwclock --systohc --utc
 >we are embedding our key file to the initramfs only because we are expected to enter our passphrase at the grub level (before initramfs and the kernel are loaded) already and a 2nd time at the initramfs level so it makes sense to embed a keyfile into our initramfs in order to avoid this redundancy.
 Please do NOT embed a key file on your disk and use it to decrypt it without requiring a passphrase at an earlier level because it kind of defeats the purpose of encrypting your disk, if all that is required to decrypt it is.. booting your computer.(Unless you are storing your keyfile on a usb drive for example)
 
--> Add the keyfile to the initramfs image
+23. Add the keyfile to the initramfs image
 
 ```
 /etc/mkinitcpio.conf
@@ -267,7 +264,7 @@ mkinitcpio -p linux
 
 ![crypto_keyfile](crypto_keyfile.png)
 
--> Regenerate GRUB
+24. Regenerate GRUB
 
 ```
 Edit /etc/default/grub again
@@ -296,13 +293,13 @@ The answer to that is: well that's how LUKS work:
 >
 >But enough about LUKS, let us continue with our installation
 
--> Create User
+25. Create User
 
 ```
 useradd -m -G wheel -s /bin/bash <user>`
 passwd <user>
 ```
-
+26. Reset root password or edit /etc/sudoers to allow members wheel group to execute commands
 
 <br/>
 # Post-Installation
