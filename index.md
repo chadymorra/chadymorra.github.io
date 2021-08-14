@@ -296,7 +296,7 @@ The answer to that is: well that's how LUKS work:
 `useradd -m -G wheel -s /bin/bash <user>`
 `passwd <user>`
 
-
+<br/><br/>
 # Post-Installation
 
 
