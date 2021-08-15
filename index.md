@@ -1,5 +1,4 @@
 <link rel="shortcut icon" type="image/x-icon" href="{{ "/favicon.ico" | prepend: site.baseurl }}">
-{% seo %}
 {% include analytics.html %}
 
 
