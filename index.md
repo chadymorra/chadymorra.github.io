@@ -77,11 +77,11 @@ Please keep in mind that even though we take as much security measures as we can
 
 * Boot into the live enviroment
 
-	- OPTIONAL: connect using ssh to be able to read & install from one single workstation also be able to copy paste commands. 
-	  - `systemctl start sshd` to start the ssh daemon.
-	  - `ip a s` to take note of the device's ip address.
-	  - `passwd` to reset root's password.
-	  - `ssh root@ip` ssh into it.
+- OPTIONAL: connect using ssh to be able to read & install from one single workstation also be able to copy paste commands. 
+  >- `systemctl start sshd` to start the ssh daemon.
+  >- `ip a s` to take note of the device's ip address.
+  >- `passwd` to reset root's password.
+  >- `ssh root@ip` ssh into it.
 
 * Set the keyboard layout:
 
