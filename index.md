@@ -68,15 +68,14 @@ Please keep in mind that even though we take as much security measures as we can
 
 # Installation
 
+* Download arch linux installation image from [here](https://archlinux.org/download/)
 
-1. Download arch linux installation image from [here](https://archlinux.org/download/)
-
-2. Verify signature
+* Verify signature
 `gpg --keyserver-options auto-key-retrieve --verify archlinux-_version_-x86_64.iso.sig`
 
-3. Prepare an installation media
+* Prepare an installation media
 
-4. Boot into the live enviroment
+* Boot into the live enviroment
 
 	- OPTIONAL: connect using ssh to be able to read & install from one single workstation also be able to copy paste commands. 
 	  - `systemctl start sshd` to start the ssh daemon.
@@ -84,26 +83,26 @@ Please keep in mind that even though we take as much security measures as we can
 	  - `passwd` to reset root's password.
 	  - `ssh root@ip` ssh into it.
 
-5. Set the keyboard layout:
+* Set the keyboard layout:
 
 `loadkeys us`
 
-6. verify that we have booted into UEFI mode
+* verify that we have booted into UEFI mode
 
 `ls /sys/firmware/efi/efivars`
 
-7. Update the system clock
+* Update the system clock
 `timedatectl set-ntp true`
 
-8. Make sure you have internet access
+* Make sure you have internet access
 
 `ping archlinux.org`
 
-9. Let's first start by securely wiping our device:
+* Let's first start by securely wiping our device:
 
 `cryptsetup open --type plain -d /dev/urandom /dev/<block-device> to_be_wiped`
 
-10. You can verify that it exists:
+* You can verify that it exists:
 
 ```
  lsblk
@@ -113,7 +112,7 @@ sda             8:0    0  1.8T  0 disk
 └─to_be_wiped 252:0    0  1.8T  0 crypt
 ```
 
-11. Wipe the container with zeros. A use of `if=/dev/urandom` is not required as the   encryption cipher is used for randomness.
+* Wipe the container with zeros. A use of `if=/dev/urandom` is not required as the   encryption cipher is used for randomness.
 
 ```
 dd if=/dev/zero of=/dev/mapper/to_be_wiped status=progress
@@ -123,7 +122,7 @@ dd: writing to ‘/dev/mapper/to_be_wiped’: No space left on device
 cryptsetup close to_be_wiped
 ```
 
-12. Partitioning (you can use any partitioning tool you want )
+* Partitioning (you can use any partitioning tool you want )
 
 ``cfdisk /dev/sda``
 
@@ -133,7 +132,7 @@ cryptsetup close to_be_wiped
 |8GB for swap partition       |    Linux swap
 |the rest for the root partition | Linux Filesystem
 
-13. Formatting:
+* Formatting:
 
 ```
  mkfs.fat -F32 -n EFI /dev/sda1
@@ -149,7 +148,7 @@ cryptsetup close to_be_wiped
 
 > Notice how LUKS prompts you to enter a passphrase and not a password, [this](https://protonmail.com/blog/protonmail-com-blog-password-vs-passphrase/) is a good article that explains the difference, generally speaking humans are terrible at creating strong passwords with good entropy and remembering it and that's why we use password managers, but another option would be using passphrases 4-5 words chosen at random, example: "correct horse battery staple"
 
-14. Creating subvolumes:
+* Creating subvolumes:
 
 ```
  mount -t btrfs -o compress=lzo /dev/mapper/cryptroot /mnt   
@@ -165,20 +164,20 @@ cryptsetup close to_be_wiped
  mount -o compress=lzo,subvol=@snapshots,$o_btrfs /dev/mapper/cryptroot /mnt/.snapshots 
 ```
 
-15. Mounting ESP partition
+* Mounting ESP partition
 
 ```
  mkdir -p /mnt/boot/efi
  mount /dev/sda1 /mnt/boot/efi
  ```
 
-16. Installing packages to our new root directory /mnt
+* Installing packages to our new root directory /mnt
 
 ```
  pacstrap /mnt base base-devel btrfs-progs linux linux-firmware mkinitcpio nano vim dhcpcd wpa_supplicant
 ```  
 
-17. fstab + crypttab
+* fstab + crypttab
 
 ```  
   genfstab -L -p /mnt >> /mnt/etc/fstab 
@@ -194,11 +193,11 @@ cryptsetup close to_be_wiped
 swap        /dev/sda2        /dev/urandom        swap,offset=2048,cipher=aes-xts-plain64,size=256
 ```  
 
-18. chroot into the new root directory
+* chroot into the new root directory
 
 `arch-chroot /mnt /bin/bash`
 
-19. localtime + syncing hardware clock + hostname
+* localtime + syncing hardware clock + hostname
 
 ```
  ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime
@@ -210,11 +209,11 @@ hwclock --systohc --utc
  edit /etc/hosts file and match that accordingly 
 ```
 
-20. Edit /etc/locale.gen and uncomment en_US.UTF-8 UTF-8 and other needed locales. Generate the locales by running:
+* Edit /etc/locale.gen and uncomment en_US.UTF-8 UTF-8 and other needed locales. Generate the locales by running:
 
  `locale-gen`
 
-21. Installing GRUB
+* Installing GRUB
 
 ```
  pacman -S grub
@@ -232,7 +231,7 @@ hwclock --systohc --utc
  grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
-22. Adding a secret key file to LUKS
+* Adding a secret key file to LUKS
 
 ```
 * mkdir /root/secrets && chmod 700 /root/secrets
@@ -264,7 +263,7 @@ mkinitcpio -p linux
 
 ![crypto_keyfile](crypto_keyfile.png)
 
-24. Regenerate GRUB
+* Regenerate GRUB
 
 ```
 Edit /etc/default/grub again
@@ -293,13 +292,13 @@ The answer to that is: well that's how LUKS work:
 >
 >But enough about LUKS, let us continue with our installation
 
-25. Create User
+* Create User
 
 ```
 useradd -m -G wheel -s /bin/bash <user>`
 passwd <user>
 ```
-26. Reset root password or edit /etc/sudoers to allow members wheel group to execute commands
+* Reset root password or edit /etc/sudoers to allow members wheel group to execute commands
 
 <br/>
 # Post-Installation
