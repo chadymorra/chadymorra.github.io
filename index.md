@@ -259,7 +259,7 @@ FILES=(/root/secrets/crypto_keyfile.bin)
 
 mkinitcpio -p linux
 ```
-</br>
+<br/>
 
 **Image below shows our crypto_keyfile embedded inside initramfs:**
 
@@ -274,7 +274,7 @@ GRUB_CMDLINE_LINUX="... cryptkey=rootfs:/root/secrets/crypto_keyfile.bin"
 
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
-</br>
+<br/>
 
 **The cryptkey parameter we are passing in our grub, will be picked up by the encrypt hook that we included in our initramfs:**
 
