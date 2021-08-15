@@ -92,6 +92,7 @@ Please keep in mind that even though we take as much security measures as we can
 `ls /sys/firmware/efi/efivars`
 
 * Update the system clock
+
 `timedatectl set-ntp true`
 
 * Make sure you have internet access
@@ -244,7 +245,7 @@ hwclock --systohc --utc
 >we are embedding our key file to the initramfs only because we are expected to enter our passphrase at the grub level (before initramfs and the kernel are loaded) already and a 2nd time at the initramfs level so it makes sense to embed a keyfile into our initramfs in order to avoid this redundancy.
 Please do NOT embed a key file on your disk and use it to decrypt it without requiring a passphrase at an earlier level because it kind of defeats the purpose of encrypting your disk, if all that is required to decrypt it is.. booting your computer.(Unless you are storing your keyfile on a usb drive for example)
 
-23. Add the keyfile to the initramfs image
+* Add the keyfile to the initramfs image
 
 ```
 /etc/mkinitcpio.conf
@@ -259,6 +260,7 @@ FILES=(/root/secrets/crypto_keyfile.bin)
 mkinitcpio -p linux
 ```
 </br>
+
 **Image below shows our crypto_keyfile embedded inside initramfs:**
 
 ![crypto_keyfile](crypto_keyfile.png)
@@ -273,6 +275,7 @@ GRUB_CMDLINE_LINUX="... cryptkey=rootfs:/root/secrets/crypto_keyfile.bin"
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
 </br>
+
 **The cryptkey parameter we are passing in our grub, will be picked up by the encrypt hook that we included in our initramfs:**
 
 ![encrypt_hook](encrypt_hook.png)
