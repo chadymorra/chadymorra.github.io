@@ -80,7 +80,7 @@ Please keep in mind that even though we take as much security measures as we can
   >- `passwd` to reset root's password.
   >- `ssh root@ip` ssh into it.
 
-* Set the keyboard layout:
+* Set the keyboard layout:( If you are using ssh then you can skip this step since your ssh client will be sending keys after being interpreted by your local keymap) 
 
 `loadkeys us`
 
@@ -210,6 +210,14 @@ hwclock --systohc --utc
 * Edit /etc/locale.gen and uncomment en_US.UTF-8 UTF-8 and other needed locales. Generate the locales by running:
 
  `locale-gen`
+
+* Create /etc/locale.conf and set the LANG variable:
+
+`LANG=en_US.UTF-8`
+
+* Edit /etc/vconsole.conf to make your keyboard layout change persistent
+
+`KEYMAP=us`
 
 * Installing GRUB
 
