@@ -1,6 +1,7 @@
+<link rel="shortcut icon" type="image/x-icon" href="{{ "/favicon.ico" | prepend: site.baseurl }}">
 {% seo %}
 {% include analytics.html %}
-<link rel="shortcut icon" type="image/x-icon" href="archsec.github.io/favicon.ico">
+
 
 # Introduction
 
