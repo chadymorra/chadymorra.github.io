@@ -50,6 +50,7 @@ Please keep in mind that even though we take as much security measures as we can
   - Dynamic inode allocation
   - Integrated multiple device support + RAID
   - deduplication
+	
 	just to name a few...
 	
 	
@@ -58,7 +59,9 @@ Please keep in mind that even though we take as much security measures as we can
   - using snapshots can be very helpful.
   - documenting your steps will help you with two things: understanding better and easier  troubleshooting.
   - I will be using UEFI with GPT but if you decide to go with something else please make note of the below:
+	
 	-> For [BIOS/GPT systems](https://wiki.archlinux.org/title/GRUB#GUID_Partition_Table_(GPT)_specific_instructions "GRUB") create a [BIOS boot partition](https://wiki.archlinux.org/title/BIOS_boot_partition "BIOS boot partition") with size of 1 MiB for GRUB to store the second stage of BIOS bootloader. Do not mount the partition. For BIOS/MBR systems this is not necessary.
+	
 	-> For [UEFI systems](https://wiki.archlinux.org/title/GRUB#UEFI_systems "GRUB") create an [EFI system partition](https://wiki.archlinux.org/title/EFI_system_partition "EFI system partition") with an appropriate size, it will later be mounted at /boot/efi
 
 <br/>
