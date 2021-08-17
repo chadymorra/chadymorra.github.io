@@ -3,4 +3,5 @@ title: Secured Arch Linux Installation
 description: Arch Linux installation using BTRFS on Full Disk Encryption and Secure Boot 
 markdown: kramdown
 author: Chady Morra
-linkedin_username: chady-morra
+social_links:
+  linkedin: chady-morra
