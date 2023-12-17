@@ -157,6 +157,7 @@ cryptsetup close to_be_wiped
  btrfs subv create @  
  btrfs subv create @home
  btrfs subv create @snapshots
+ cd /
  umount /mnt
  o=defaults,x-mount.mkdir 
  o_btrfs=$o,compress=lzo,ssd,noatime    
